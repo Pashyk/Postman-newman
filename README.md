@@ -1,5 +1,5 @@
 # Postman-newman
-<h1>Automating with Newman
+Automating with Newman
 
 Install nodejs using the apt package manager:
 ```
