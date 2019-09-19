@@ -15,5 +15,5 @@ npm install newman
 ```
 Run collection:
 ``
-newman run path to swapi.co.postman_collection.json
+newman run swapi.co_collection.json --environment swapi.co_environment.json
 ``
