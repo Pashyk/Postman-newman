@@ -1,0 +1,242 @@
+{
+	"info": {
+		"_postman_id": "052c35a4-0b03-4108-999a-7d3fa32a0644",
+		"name": "swapi.co_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Invalid API key",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1e02558c-6dd9-474c-95e1-36f3fe36ec5d",
+						"exec": [
+							"pm.test(\"Status code is 404\", () => pm.response.to.have.status(404));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://swapi.co/ap",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"ap"
+					]
+				},
+				"description": "https://swapi.co/ap"
+			},
+			"response": []
+		},
+		{
+			"name": "Base URL to the endpoints in order to make requests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1e02558c-6dd9-474c-95e1-36f3fe36ec5d",
+						"exec": [
+							"const response = pm.response.json();",
+							"const resourses = {",
+							"    \"people\": \"https://swapi.co/api/people/\",",
+							"    \"planets\": \"https://swapi.co/api/planets/\",",
+							"    \"films\": \"https://swapi.co/api/films/\",",
+							"    \"species\": \"https://swapi.co/api/species/\",",
+							"    \"vehicles\": \"https://swapi.co/api/vehicles/\",",
+							"    \"starships\": \"https://swapi.co/api/starships/\"",
+							"};",
+							"pm.test(\"Body request\", () => pm.expect(response).to.eql(resourses));",
+							"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				},
+				"description": "The Root resource provides information on all available resources within the API."
+			},
+			"response": []
+		},
+		{
+			"name": "Film list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5386110b-1196-4135-b3ff-32a63480f983",
+						"exec": [
+							"const response = pm.response.json();",
+							"const films = [\"A New Hope\", \"Attack of the Clones\", \"The Phantom Menace\", \"Revenge of the Sith\", \"Return of the Jedi\", \"The Empire Strikes Back\", \"The Force Awakens\"];",
+							"",
+							"pm.test(\"Movie parts number\", () => pm.expect(response.count).to.eql(7));",
+							"pm.test(\"Film's titeles check\", () => pm.expect(response.results.map(film => film.title)).to.eql(films));",
+							"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}films/",
+					"host": [
+						"{{url}}films"
+					],
+					"path": [
+						""
+					]
+				},
+				"description": "Checks a list of StarWars films"
+			},
+			"response": []
+		},
+		{
+			"name": "Check POST method availability",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "71c60b56-2f09-444e-9ad4-05cd57237058",
+						"exec": [
+							"pm.test(\"Status code is 405\", () => pm.response.to.have.status(405));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}people/?New Hero=John Wick",
+					"host": [
+						"{{url}}people"
+					],
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "New Hero",
+							"value": "John Wick"
+						}
+					]
+				},
+				"description": "Checks if post method is available"
+			},
+			"response": []
+		},
+		{
+			"name": "Check DELETE method availabillity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2949d486-db3a-4fcc-9611-24811d2d746e",
+						"exec": [
+							"pm.test(\"Status code is 405\", () => pm.response.to.have.status(405));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}people/1/",
+					"host": [
+						"{{url}}people"
+					],
+					"path": [
+						"1",
+						""
+					]
+				},
+				"description": "Check if DELETE method is available"
+			},
+			"response": []
+		},
+		{
+			"name": "Character check",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b648dbd7-9abc-414e-97f3-d50eb64474f5",
+						"exec": [
+							"const response = pm.response.json();",
+							"",
+							"pm.test(\"Your test name\", () => pm.expect(response.results[0].name).to.eql(\"Darth Maul\"));",
+							"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}people/?search=Darth Maul",
+					"host": [
+						"{{url}}people"
+					],
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "Darth Maul"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

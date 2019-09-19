@@ -1,0 +1,15 @@
+{
+	"id": "ef5b6e86-7af7-4354-8a90-22419ad1b040",
+	"name": "https://swapi.co/api/",
+	"values": [
+		{
+			"key": "url",
+			"value": "https://swapi.co/api/",
+			"description": "",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2019-09-18T09:07:25.848Z",
+	"_postman_exported_using": "Postman/6.7.1"
+}
