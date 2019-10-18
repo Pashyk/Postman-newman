@@ -14,6 +14,12 @@ Install newman to be able run collection:
 npm install newman
 ```
 Run collection:
-``
+```
 newman run swapi.co_collection.json --environment swapi.co_environment.json
-``
+```
+To be able generate generate html report run:
+`npm install -S newman-reporter-htmlextra && newman run swapi.co_collection.json --environment swapi.co_environment.json \
+--reporters cli,junit,htmlextra \
+--reporter-junit-export "newman/report.xml" \
+--reporter-htmlextra-export "newman/report.html" \
+--reporter-htmlextra-template "./dashboard-template.hbs"`
